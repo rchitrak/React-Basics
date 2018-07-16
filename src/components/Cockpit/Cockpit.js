@@ -1,23 +1,30 @@
 import React from 'react';
-import Radium, { StyleRoot } from 'radium';
+
+import classes from './Cockpit.css';
+
 const cockpit = (props) => {
 
-    const classes = [];
-    if (props.persons.length <= 2)
-      classes.push('red'); //classes=['red']
-    if (props.persons.length <= 1)   //classes=['red','bold']
-      classes.push('bold');
-
+    const assignedClasses = [];
+    let btnClass = '';
+    if(props.showPersons) {
+      btnClass = classes.Red;
+    }
+    if (props.persons.length <= 2) {
+      assignedClasses.push(classes.red); //classes=['red']
+    } 
+    if (props.persons.length <= 1) {  //classes=['red','bold']
+      assignedClasses.push(classes.bold);
+  }
     return(
-        <div>
+        <div className = {classes.Cockpit}>
         <h1> Hi, this is React </h1>
-          <p className={classes.join(' ')} > Starting to learn React :o </p>
+          <p className={assignedClasses.join(' ')} > Starting to learn React :o </p>
           <button
-            style={style}
+            className ={btnClass}
             //onClick={this.switchNameHandler.bind(this,'RupChi')}> Switch Name 
-            onClick={this.togglePersonHandler}> Toggle Persons </button>
+            onClick={props.clicked}> Toggle Persons </button>
         </div>
     );
-}
+};
 
-export default Radium(cockpit);
+export default cockpit;
